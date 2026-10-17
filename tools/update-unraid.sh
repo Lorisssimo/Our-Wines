@@ -22,6 +22,10 @@ else
   if [[ -z "$host_data_dir" ]]; then
     host_data_dir="$project_dir/data"
   fi
+  host_port="$(sed -n 's/^HOST_PORT=//p' .env | tail -n 1)"
+  if [[ -z "$host_port" ]]; then
+    host_port="3000"
+  fi
 
   mkdir -p "$host_data_dir"
   docker build -t our-wines:local .
@@ -33,7 +37,7 @@ else
   docker run -d \
     --name our-wines \
     --restart unless-stopped \
-    -p 3000:3000 \
+    -p "$host_port:3000" \
     -v "$host_data_dir:/app/data" \
     --env-file "$project_dir/.env" \
     -e DATA_DIR=/app/data \

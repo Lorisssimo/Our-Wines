@@ -115,6 +115,7 @@ Edit `/mnt/user/appdata/our-wines/source/.env` and set at least:
 
 ```dotenv
 APP_PUBLIC_URL=https://weine.example.com
+HOST_PORT=3000
 HOST_DATA_DIR=/mnt/user/appdata/our-wines/data
 AUTH_ENABLED=true
 AUTH_PASSWORD=choose-a-long-unique-password!
@@ -163,6 +164,7 @@ Run one application container only. SQLite is not intended for horizontally scal
 | --- | --- | --- |
 | `NODE_ENV` | `production` | Use `production` in Docker. Enables strict password checks. |
 | `PORT` | `3000` | HTTP listen port inside the container. |
+| `HOST_PORT` | `3000` | Host port published by Docker Compose or the Unraid update helper. The container still listens on `PORT`. |
 | `APP_PUBLIC_URL` | `https://weine.example.com` | Canonical external origin for QR links, cookies, and origin checks. No trailing slash required. |
 | `DATA_DIR` | `/app/data` | Persistent database and upload directory. |
 | `AUTH_ENABLED` | `true` | Shared-password access control. `false` intentionally exposes all data and writes. |

@@ -24,7 +24,7 @@ else
   fi
   host_port="$(sed -n 's/^HOST_PORT=//p' .env | tail -n 1)"
   if [[ -z "$host_port" ]]; then
-    host_port="3000"
+    host_port="5432"
   fi
 
   mkdir -p "$host_data_dir"

@@ -95,7 +95,7 @@ docker compose up -d --build
 docker compose logs -f our-wines
 ```
 
-The application is available on host port 3000 and stores data in `./data`. Compose requires `AUTH_PASSWORD` to be set. The application applies its idempotent schema migration during startup.
+The application is available on host port 5432 and stores data in `./data`. Compose requires `AUTH_PASSWORD` to be set. The application applies its idempotent schema migration during startup.
 
 ## Unraid deployment
 
@@ -115,7 +115,7 @@ Edit `/mnt/user/appdata/our-wines/source/.env` and set at least:
 
 ```dotenv
 APP_PUBLIC_URL=https://weine.example.com
-HOST_PORT=3000
+HOST_PORT=5432
 HOST_DATA_DIR=/mnt/user/appdata/our-wines/data
 AUTH_ENABLED=true
 AUTH_PASSWORD=choose-a-long-unique-password!
@@ -148,11 +148,11 @@ The included `unraid-template.xml` can be imported as a starting point, or creat
 
 1. Repository/image: `our-wines:local` (or your registry image).
 2. Network: `bridge`.
-3. Port mapping: host `3000` to container `3000/tcp`.
+3. Port mapping: host `5432` to container `3000/tcp`.
 4. Path mapping: `/mnt/user/appdata/our-wines` to `/app/data` with read/write access.
 5. Add every required environment variable listed below in the Unraid Docker UI.
 6. Set a strong `AUTH_PASSWORD`; do not leave `123456` in place.
-7. Start the container and check `http://UNRAID-IP:3000/api/health`.
+7. Start the container and check `http://UNRAID-IP:5432/api/health`.
 
 The container runs as UID/GID 1000. If a new bind-mounted appdata directory is not writable, give UID 1000 ownership or equivalent write permission before starting the container.
 
@@ -164,7 +164,7 @@ Run one application container only. SQLite is not intended for horizontally scal
 | --- | --- | --- |
 | `NODE_ENV` | `production` | Use `production` in Docker. Enables strict password checks. |
 | `PORT` | `3000` | HTTP listen port inside the container. |
-| `HOST_PORT` | `3000` | Host port published by Docker Compose or the Unraid update helper. The container still listens on `PORT`. |
+| `HOST_PORT` | `5432` | Host port published by Docker Compose or the Unraid update helper. The container still listens on `PORT`. |
 | `APP_PUBLIC_URL` | `https://weine.example.com` | Canonical external origin for QR links, cookies, and origin checks. No trailing slash required. |
 | `DATA_DIR` | `/app/data` | Persistent database and upload directory. |
 | `AUTH_ENABLED` | `true` | Shared-password access control. `false` intentionally exposes all data and writes. |
@@ -184,7 +184,7 @@ No router port forwarding is needed. In Cloudflare Zero Trust:
 
 1. Create or select a tunnel connected to the Unraid server.
 2. Add a public hostname such as `weine.example.com`.
-3. Route it to `http://UNRAID-IP:3000` (or the container service name when the connector shares its Docker network).
+3. Route it to `http://UNRAID-IP:5432` (or the container service name when the connector shares its Docker network).
 4. Set the application variable `APP_PUBLIC_URL=https://weine.example.com` and restart the container.
 5. Verify that login, a direct `/wines/<id>` URL, and its QR code work through HTTPS.
 

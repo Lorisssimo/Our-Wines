@@ -20,7 +20,7 @@
   <DonateText/>
   <DonateLink/>
   <Requires>Build the image locally as our-wines:local. Replace the insecure password placeholder before the first production start.</Requires>
-  <Config Name="Web UI" Target="3000" Default="3000" Mode="tcp" Description="Host port for the web interface" Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+  <Config Name="Web UI" Target="3000" Default="5432" Mode="tcp" Description="Host port for the web interface" Type="Port" Display="always" Required="true" Mask="false">5432</Config>
   <Config Name="Persistent data" Target="/app/data" Default="/mnt/user/appdata/our-wines" Mode="rw" Description="SQLite database and uploaded bottle photos" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/our-wines</Config>
   <Config Name="Public URL" Target="APP_PUBLIC_URL" Default="https://weine.example.com" Mode="" Description="External HTTPS URL used for QR codes and security checks" Type="Variable" Display="always" Required="true" Mask="false">https://weine.example.com</Config>
   <Config Name="Authentication enabled" Target="AUTH_ENABLED" Default="true" Mode="" Description="Set false only for an intentionally public instance" Type="Variable" Display="always" Required="true" Mask="false">true</Config>

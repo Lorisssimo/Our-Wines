@@ -4,13 +4,13 @@ services:
     container_name: our-wines
     restart: unless-stopped
     ports:
-      - "${HOST_PORT:-3000}:3000"
+      - "${HOST_PORT:-5432}:3000"
     volumes:
       - ${HOST_DATA_DIR:-./data}:/app/data
     environment:
       NODE_ENV: production
       PORT: 3000
-      APP_PUBLIC_URL: ${APP_PUBLIC_URL:-http://localhost:3000}
+      APP_PUBLIC_URL: ${APP_PUBLIC_URL:-http://localhost:5432}
       DATA_DIR: /app/data
       AUTH_ENABLED: ${AUTH_ENABLED:-true}
       AUTH_PASSWORD: ${AUTH_PASSWORD:?Set a strong AUTH_PASSWORD; never use 123456 in production}

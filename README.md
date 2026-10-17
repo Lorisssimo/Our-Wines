@@ -99,6 +99,42 @@ The application is available on host port 3000 and stores data in `./data`. Comp
 
 ## Unraid deployment
 
+### Build directly from this GitHub repository
+
+Unraid's standard Docker form pulls container images, not Git source. To let Unraid pull this repository and build it locally, use the terminal once for setup:
+
+```bash
+mkdir -p /mnt/user/appdata/our-wines
+cd /mnt/user/appdata/our-wines
+git clone https://github.com/Lorisssimo/Our-Wines.git source
+cd source
+cp .env.example .env
+```
+
+Edit `/mnt/user/appdata/our-wines/source/.env` and set at least:
+
+```dotenv
+APP_PUBLIC_URL=https://weine.example.com
+HOST_DATA_DIR=/mnt/user/appdata/our-wines/data
+AUTH_ENABLED=true
+AUTH_PASSWORD=choose-a-long-unique-password!
+```
+
+Then build and start from the cloned source:
+
+```bash
+cd /mnt/user/appdata/our-wines/source
+docker compose up -d --build
+```
+
+For later updates, run:
+
+```bash
+/mnt/user/appdata/our-wines/source/tools/update-unraid.sh
+```
+
+The helper performs a fast-forward-only pull from `main`, rebuilds the image, recreates the container, and reports its status. It stops instead of overwriting local source changes. The `.env` file is ignored by Git, and `HOST_DATA_DIR` keeps the database and photos outside the source checkout. The command can optionally be added to the Unraid User Scripts plugin for manual or scheduled updates; review releases and keep backups before automating upgrades.
+
 ### Build the image
 
 Copy this repository to the server or build it on another machine and publish it to a registry you control. For a local Unraid build from the repository directory:

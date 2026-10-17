@@ -58,7 +58,11 @@ export async function buildApp({ config, database = createDatabase(config.dataDi
         imgSrc: ["'self'", 'data:', 'blob:'],
         styleSrc: ["'self'", "'unsafe-inline'"],
         scriptSrc: ["'self'"],
-        connectSrc: ["'self'"]
+        connectSrc: ["'self'"],
+        // The app intentionally supports direct LAN access over HTTP on Unraid.
+        // Helmet enables this directive by default, which would rewrite the
+        // relative JS/CSS asset requests to HTTPS and leave the HTTP UI blank.
+        upgradeInsecureRequests: null
       }
     },
     crossOriginResourcePolicy: { policy: 'same-origin' }

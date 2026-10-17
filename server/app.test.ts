@@ -30,6 +30,14 @@ afterEach(async () => {
 });
 
 describe('Our Wines API', () => {
+  it('keeps HTTP LAN assets on HTTP while retaining the content security policy', async () => {
+    const instance = await app();
+    const response = await instance.inject({ method: 'GET', url: '/api/health' });
+    const policy = response.headers['content-security-policy'];
+    expect(policy).toContain("default-src 'self'");
+    expect(policy).not.toContain('upgrade-insecure-requests');
+  });
+
   it('protects private endpoints and supports shared-password login/logout', async () => {
     const instance = await app({ authEnabled: true });
     expect((await instance.inject({ method: 'GET', url: '/api/people' })).statusCode).toBe(401);

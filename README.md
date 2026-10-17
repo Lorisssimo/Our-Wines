@@ -133,7 +133,7 @@ For later updates, run:
 /mnt/user/appdata/our-wines/source/tools/update-unraid.sh
 ```
 
-The helper performs a fast-forward-only pull from `main`, rebuilds the image, recreates the container, and reports its status. It stops instead of overwriting local source changes. The `.env` file is ignored by Git, and `HOST_DATA_DIR` keeps the database and photos outside the source checkout. The command can optionally be added to the Unraid User Scripts plugin for manual or scheduled updates; review releases and keep backups before automating upgrades.
+The helper performs a fast-forward-only pull from `main`, rebuilds the image, recreates the container, and reports its status. It uses Docker Compose when available and automatically falls back to plain `docker build` and `docker run` on standard Unraid installations without a Compose plugin. It stops instead of overwriting local source changes. The `.env` file is ignored by Git, and `HOST_DATA_DIR` keeps the database and photos outside the source checkout. The command can optionally be added to the Unraid User Scripts plugin for manual or scheduled updates; review releases and keep backups before automating upgrades.
 
 ### Build the image
 

@@ -1,0 +1,13 @@
+{
+  "name": "Our Wines",
+  "short_name": "Weine",
+  "description": "Private Weinsammlung und gemeinsame Bewertungen",
+  "lang": "de",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F5F0",
+  "theme_color": "#792F45",
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

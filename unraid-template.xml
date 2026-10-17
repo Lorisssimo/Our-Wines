@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Our Wines</Name>
+  <Repository>our-wines:local</Repository>
+  <Registry/>
+  <Network>bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project/>
+  <Overview>Private, mobile-first wine collection and rating application.</Overview>
+  <Category>Productivity:</Category>
+  <WebUI>http://[IP]:[PORT:3000]/</WebUI>
+  <TemplateURL/>
+  <Icon/>
+  <ExtraParams>--init</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires>Build the image locally as our-wines:local. Replace the insecure password placeholder before the first production start.</Requires>
+  <Config Name="Web UI" Target="3000" Default="3000" Mode="tcp" Description="Host port for the web interface" Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+  <Config Name="Persistent data" Target="/app/data" Default="/mnt/user/appdata/our-wines" Mode="rw" Description="SQLite database and uploaded bottle photos" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/our-wines</Config>
+  <Config Name="Public URL" Target="APP_PUBLIC_URL" Default="https://weine.example.com" Mode="" Description="External HTTPS URL used for QR codes and security checks" Type="Variable" Display="always" Required="true" Mask="false">https://weine.example.com</Config>
+  <Config Name="Authentication enabled" Target="AUTH_ENABLED" Default="true" Mode="" Description="Set false only for an intentionally public instance" Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="Shared password" Target="AUTH_PASSWORD" Default="123456" Mode="" Description="INSECURE PLACEHOLDER. The production container refuses to start until this is replaced with at least 12 characters including a letter and symbol." Type="Variable" Display="always" Required="true" Mask="true">123456</Config>
+  <Config Name="Session days" Target="AUTH_SESSION_DAYS" Default="30" Mode="" Description="Session lifetime in days" Type="Variable" Display="advanced" Required="true" Mask="false">30</Config>
+  <Config Name="Overall weight" Target="SCORE_WEIGHT_OVERALL" Default="8" Mode="" Description="Weight for overall rating" Type="Variable" Display="advanced" Required="true" Mask="false">8</Config>
+  <Config Name="Taste weight" Target="SCORE_WEIGHT_TASTE" Default="6" Mode="" Description="Weight for taste" Type="Variable" Display="advanced" Required="true" Mask="false">6</Config>
+  <Config Name="Aftertaste weight" Target="SCORE_WEIGHT_AFTERTASTE" Default="3" Mode="" Description="Weight for aftertaste" Type="Variable" Display="advanced" Required="true" Mask="false">3</Config>
+  <Config Name="Sweetness liking weight" Target="SCORE_WEIGHT_SWEETNESS" Default="3" Mode="" Description="Weight for liking of sweetness/dryness" Type="Variable" Display="advanced" Required="true" Mask="false">3</Config>
+  <Config Name="Maximum upload MB" Target="MAX_UPLOAD_MB" Default="8" Mode="" Description="Maximum image upload size" Type="Variable" Display="advanced" Required="true" Mask="false">8</Config>
+</Container>

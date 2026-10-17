@@ -1,0 +1,22 @@
+services:
+  our-wines:
+    build: .
+    container_name: our-wines
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      APP_PUBLIC_URL: ${APP_PUBLIC_URL:-http://localhost:3000}
+      DATA_DIR: /app/data
+      AUTH_ENABLED: ${AUTH_ENABLED:-true}
+      AUTH_PASSWORD: ${AUTH_PASSWORD:?Set a strong AUTH_PASSWORD; never use 123456 in production}
+      AUTH_SESSION_DAYS: ${AUTH_SESSION_DAYS:-30}
+      SCORE_WEIGHT_OVERALL: ${SCORE_WEIGHT_OVERALL:-8}
+      SCORE_WEIGHT_TASTE: ${SCORE_WEIGHT_TASTE:-6}
+      SCORE_WEIGHT_AFTERTASTE: ${SCORE_WEIGHT_AFTERTASTE:-3}
+      SCORE_WEIGHT_SWEETNESS: ${SCORE_WEIGHT_SWEETNESS:-3}
+      MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-8}
